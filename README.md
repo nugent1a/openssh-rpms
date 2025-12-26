@@ -1,6 +1,6 @@
 # OpenSSH RPM Builder (Universal)
 
-![Version](https://img.shields.io/badge/Version-v32.0-brightgreen) ![Platform](https://img.shields.io/badge/Platform-RHEL%20%7C%20CentOS%20%7C%20Anolis%20%7C%20Kylin%20%7C%20openEuler-blue) ![Shell](https://img.shields.io/badge/Language-Bash-orange)
+![Version](https://img.shields.io/badge/Version-v2.0-brightgreen) ![Platform](https://img.shields.io/badge/Platform-RHEL%20%7C%20CentOS%20%7C%20Anolis%20%7C%20Kylin%20%7C%20openEuler-blue) ![Shell](https://img.shields.io/badge/Language-Bash-orange)
 
 > **一键构建、智能探测、全平台兼容。** > 为您的 Linux 服务器轻松构建最新版本的 OpenSSH RPM 安装包。
 
