@@ -369,7 +369,7 @@ tput civis
 
 if [ "$install_choice" == "1" ]; then
     run_task "安装依赖组件" "02_yum_install.log" \
-        "yum install -y rpm-build gcc gcc-c++ make perl perl-IPC-Cmd perl-Data-Dumper perl-Pod-Html zlib-devel pam-devel krb5-devel libXt-devel imake gtk2-devel perl-devel systemd-devel"
+        "yum install -y rpm-build gcc gcc-c++ make perl perl-IPC-Cmd perl-Data-Dumper perl-Pod-Html zlib-devel pam-devel krb5-devel libXt-devel imake gtk2-devel perl-devel perl-Time-Piece systemd-devel"
 else
     echo -e "   -> \033[1;33m跳过依赖安装\033[0m"
 fi
