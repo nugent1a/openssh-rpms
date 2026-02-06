@@ -97,7 +97,20 @@ function get_os_tag {
 }
 
 function get_arch {
-    [ "$(uname -m)" == "x86_64" ] && echo "x64" || echo "arm64"
+    local arch=$(uname -m)
+    case "$arch" in
+        x86_64|amd64)
+            echo "x86_64"
+            ;;
+        aarch64|arm64)
+            echo "aarch64"
+            ;;
+        *)
+            # 输出到标准错误(stderr)，避免污染变量赋值
+            echo -e "\n\033[1;31m[ERROR] 不支持的 CPU 架构: ${arch}！\033[0m" >&2
+            exit 1
+            ;;
+    esac
 }
 
 # === 源码探测 ===
@@ -369,7 +382,7 @@ tput civis
 
 if [ "$install_choice" == "1" ]; then
     run_task "安装依赖组件" "02_yum_install.log" \
-        "yum install -y rpm-build gcc gcc-c++ make perl perl-IPC-Cmd perl-Data-Dumper perl-Pod-Html zlib-devel pam-devel krb5-devel libXt-devel imake gtk2-devel perl-devel perl-Time-Piece systemd-devel"
+        "yum install -y rpm-build gcc gcc-c++ make perl perl-IPC-Cmd perl-Data-Dumper perl-Pod-Html zlib-devel pam-devel krb5-devel libXt-devel gtk2-devel perl-devel perl-Time-Piece systemd-devel"
 else
     echo -e "   -> \033[1;33m跳过依赖安装\033[0m"
 fi
@@ -400,7 +413,7 @@ TAR_NAME="${PACKAGE_NAME}.tar.gz"
 
 run_task "整理并压缩安装包" "07_package.log" \
     "mkdir -p ${OUTPUT_DIR}/${PACKAGE_NAME} && \
-     cp ${RPMBUILD_DIR}/RPMS/x86_64/*.rpm ${OUTPUT_DIR}/${PACKAGE_NAME}/ && \
+     cp ${RPMBUILD_DIR}/RPMS/${ARCH_TAG}/*.rpm ${OUTPUT_DIR}/${PACKAGE_NAME}/ && \
      cd ${OUTPUT_DIR} && \
      tar czf ${TAR_NAME} ${PACKAGE_NAME} && \
      rm -rf ${PACKAGE_NAME}"
